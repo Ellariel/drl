@@ -75,8 +75,9 @@ def mmm(alist: list):
 
 base_dir = os.path.dirname(__file__)
 data_dir = os.path.abspath(os.path.join(base_dir, "data"))
-weights_dir = os.path.abspath(os.path.join(base_dir, "weights"))
-results_dir = os.path.abspath(os.path.join(base_dir, "results"))
+base_results = os.path.join(base_dir, "results")
+weights_dir = os.path.join(base_results, "weights")
+results_dir = os.path.join(base_results, "logs")
 os.makedirs(results_dir, exist_ok=True)
 os.makedirs(weights_dir, exist_ok=True)
 
