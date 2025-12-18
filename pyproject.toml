@@ -1,0 +1,18 @@
+[project]
+name = "drl-for-a-pathfinding-task"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    
+    "numpy<2",
+    "pandas",
+    "networkx",
+    "requests",
+    "scipy",
+    "littleballoffur@git+https://github.com/ellariel/littleballoffur",
+    "stable-baselines3[extra]",
+    "gymnasium",
+    "tqdm",
+]
