@@ -30,7 +30,7 @@ parser.add_argument("--sample", default=50, type=int)
 parser.add_argument("--idx", default=0, type=int)
 
 parser.add_argument("--attempts", default=1, type=int)
-parser.add_argument("--epochs", default=1000, type=int)
+parser.add_argument("--epochs", default=10000, type=int)
 parser.add_argument("--timesteps", default=1e5, type=int)
 
 args = parser.parse_args()

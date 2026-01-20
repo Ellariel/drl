@@ -15,4 +15,6 @@ dependencies = [
     "stable-baselines3[extra]",
     "gymnasium",
     "tqdm",
+    "seaborn",
+    "ipykernel"
 ]
