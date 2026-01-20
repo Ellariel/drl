@@ -36,7 +36,7 @@ parser.add_argument("--timesteps", default=1e5, type=int)
 args = parser.parse_args()
 
 idx = args.idx
-n_envs = args.n_envs
+n_envs = args.n_envs 1
 timesteps = args.timesteps
 approach = args.approach
 epochs = args.epochs
