@@ -10,7 +10,7 @@ SHELL ["sh", "-exc"]
 ### This should be a separate build container for better reuse.
 
 RUN <<EOT
-apt-get update -qy
+apt-get update -qy && \
 apt-get install -qyy \
     -o APT::Install-Recommends=false \
     -o APT::Install-Suggests=false \
@@ -52,6 +52,7 @@ ENV UV_LINK_MODE=copy \
 RUN --mount=type=cache,target=/root/.cache \
     --mount=type=bind,source=uv.lock,target=/uv.lock \
     --mount=type=bind,source=pyproject.toml,target=/pyproject.toml \
+    ulimit -n 65536 && \
     uv sync \
     --locked \
     --no-dev \
@@ -85,13 +86,13 @@ EOT
 
 #ENTRYPOINT ["/docker-entrypoint.sh"]
 # See <https://hynek.me/articles/docker-signals/>.
-ENTRYPOINT ["python", "run_train.py"] 
+ENTRYPOINT ["/bin/bash"]
 STOPSIGNAL SIGINT
 
 # Note how the runtime dependencies differ from build-time ones.
 # Notably, there is no uv either!
 RUN <<EOT
-apt-get update -qy
+apt-get update -qy && \
 apt-get install -qyy \
     -o APT::Install-Recommends=false \
     -o APT::Install-Suggests=false \
