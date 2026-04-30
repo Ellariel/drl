@@ -131,8 +131,12 @@ WORKDIR /app
 # EOT
 
 
-### RUN DOCKER
+### RUN PODMAN
 
 # /opt/pkm/by-platform/x86_64-linux-gnu/podman/sbin/podman-rootless-setuptool.sh && export PATH=$PATH:/opt/pkm/by-platform/x86_64-linux-gnu/podman/bin
 # podman build . --format docker --tag drl
 # podman run -it --shm-size=10.24gb --memory=60g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
+
+### RUN DOCKER
+# docker build . --tag drl
+# docker run --shm-size=10.24g --runtime=runc -it --memory=60g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
