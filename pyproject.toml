@@ -12,8 +12,11 @@ dependencies = [
     "requests",
     "scipy",
     "littleballoffur@git+https://github.com/ellariel/littleballoffur",
+    "torch",
+    "torchvision",
+    "torchaudio",
     "stable-baselines3[extra]",
-    "gymnasium",
+    # "gymnasium",
     "tqdm",
     "seaborn",
     "ipykernel"

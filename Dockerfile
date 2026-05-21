@@ -86,6 +86,8 @@ EOT
 
 #ENTRYPOINT ["/docker-entrypoint.sh"]
 # See <https://hynek.me/articles/docker-signals/>.
+# ENTRYPOINT ["python", "metrics_base.py"] 
+# --metrics extra --num_cpu 30"]
 ENTRYPOINT ["/bin/bash"]
 STOPSIGNAL SIGINT
 
@@ -132,11 +134,39 @@ WORKDIR /app
 
 
 ### RUN PODMAN
+# /opt/pkm/by-platform/x86_64-linux-gnu/podman/sbin/podman-rootless-setuptool.sh && export PATH=$PATH:/opt/pkm/by-platform/x86_64-linux-gnu/podman/bin
+# podman build . --format docker --tag ttln
+# podman run -it --shm-size=10.24gb --memory=100g --mount type=bind,source=/home/dvalko/data,target=/app/data --mount type=bind,source=/home/dvalko/results,target=/app/results --mount type=bind,source=/home/dvalko/tmp,target=/app/tmp --entrypoint=/bin/bash ttln:latest
+# export RAY_TMPDIR=/app/tmp
+# cd scripts
+
+### RUN DOCKER
+# docker build . --tag ttln
+# docker run --shm-size=10.24g --runtime=runc -it --memory=100g --mount type=bind,source=/home/dvalko/results,target=/app/results --mount type=bind,source=/home/dvalko/data,target=/app/data --mount type=bind,source=/home/dvalko/tmp,target=/app/tmp --entrypoint=/bin/bash ttln:latest
+# export RAY_TMPDIR=/app/tmp
+# cd scripts
+
+### COMMANDS
+
+### RUN PODMAN
 
 # /opt/pkm/by-platform/x86_64-linux-gnu/podman/sbin/podman-rootless-setuptool.sh && export PATH=$PATH:/opt/pkm/by-platform/x86_64-linux-gnu/podman/bin
 # podman build . --format docker --tag drl
 # podman run -it --shm-size=10.24gb --memory=60g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
 
 ### RUN DOCKER
-# docker build . --tag drl
-# docker run --shm-size=10.24g --runtime=runc -it --memory=60g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
+# docker build --no-cache . --tag drl
+# docker run --gpus all --shm-size=16g -it --memory=128g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
+# python -c "import torch; print(torch.cuda.is_available())"
+# python -c "import torch; print(torch.cuda.get_device_name(0))"
+# python -c "import torch; print(torch.version.cuda)"
+
+
+# vlba
+
+# a2c0 
+# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 0
+# a2c1 
+# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 1
+# a2c2 
+# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 2

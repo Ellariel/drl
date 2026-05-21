@@ -29,9 +29,10 @@ parser.add_argument("--env", default="env", type=str)
 parser.add_argument("--sample", default=50, type=int)
 parser.add_argument("--idx", default=0, type=int)
 
-parser.add_argument("--attempts", default=1, type=int)
-parser.add_argument("--epochs", default=10000, type=int)
+parser.add_argument("--attempts", default=100, type=int)
+parser.add_argument("--epochs", default=100, type=int)
 parser.add_argument("--timesteps", default=1e5, type=int)
+parser.add_argument("--device", default="cuda", type=str)
 
 args = parser.parse_args()
 
@@ -129,17 +130,33 @@ for a in range(attempts):
     if os.path.exists(f) and model_class:
         try:
             model = model_class.load(
-                f, E, force_reset=False, verbose=0, learning_rate=learning_rate
+                f,
+                E,
+                force_reset=False,
+                verbose=0,
+                learning_rate=learning_rate,
+                device=args.device,
             )
             print(f"model is loaded {approach}: {f}")
         except:  # noqa: E722
             model = model_class.load(
-                f + ".tmp", E, force_reset=False, verbose=0, learning_rate=learning_rate
+                f + ".tmp",
+                E,
+                force_reset=False,
+                verbose=0,
+                learning_rate=learning_rate,
+                device=args.device,
             )
             print(f"model is loaded {approach}: {f + '.tmp'}")
     else:
         print(f"did not find {approach}: {f}")
-        model = model_class("MlpPolicy", E, verbose=0, learning_rate=learning_rate)
+        model = model_class(
+            "MlpPolicy",
+            E,
+            verbose=0,
+            learning_rate=learning_rate,
+            device=args.device,
+        )
     for epoch in range(1, epochs + 1):
         model.learn(total_timesteps=timesteps, progress_bar=True)
 
