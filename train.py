@@ -29,8 +29,8 @@ parser.add_argument("--env", default="env", type=str)
 parser.add_argument("--sample", default=50, type=int)
 parser.add_argument("--idx", default=0, type=int)
 
-parser.add_argument("--attempts", default=100, type=int)
-parser.add_argument("--epochs", default=100, type=int)
+parser.add_argument("--attempts", default=1000, type=int)
+parser.add_argument("--epochs", default=10, type=int)
 parser.add_argument("--timesteps", default=1e5, type=int)
 parser.add_argument("--device", default="cuda", type=str)
 
@@ -158,7 +158,9 @@ for a in range(attempts):
             device=args.device,
         )
     for epoch in range(1, epochs + 1):
-        model.learn(total_timesteps=timesteps, progress_bar=True)
+        model.learn(
+            total_timesteps=timesteps, reset_num_timesteps=False, progress_bar=True
+        )
 
         train_score = 0
         train_total_pathlen = []

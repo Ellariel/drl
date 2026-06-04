@@ -5,8 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "setuptools", 
-    "numpy<2",
+    #"setuptools", 
+    "numpy>=1.26,<2",
     "pandas",
     "networkx",
     "requests",
