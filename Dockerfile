@@ -165,8 +165,8 @@ WORKDIR /app
 # vlba
 
 # a2c0 
-# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 0
+# python train.py --approach A2C --device cpu --idx 0
 # a2c1 
-# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 1
+# python train.py --approach A2C --device cpu --idx 1
 # a2c2 
-# python train.py --approach A2C --attempts 100 --epochs 100 --device cpu --idx 2
+# python train.py --approach A2C --device cpu --idx 2

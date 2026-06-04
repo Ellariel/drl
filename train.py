@@ -132,7 +132,7 @@ for a in range(attempts):
             model = model_class.load(
                 f,
                 E,
-                force_reset=False,
+                force_reset=True,
                 verbose=0,
                 learning_rate=learning_rate,
                 device=args.device,
@@ -142,7 +142,7 @@ for a in range(attempts):
             model = model_class.load(
                 f + ".tmp",
                 E,
-                force_reset=False,
+                force_reset=True,
                 verbose=0,
                 learning_rate=learning_rate,
                 device=args.device,
