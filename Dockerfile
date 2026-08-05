@@ -156,11 +156,11 @@ WORKDIR /app
 
 ### RUN DOCKER
 # docker build --no-cache . --tag drl
-# docker run --gpus all --shm-size=16g -it --memory=128g --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
+# docker run --shm-size=16g -it --memory=128g --cpus=35 --mount type=bind,source=/home/dvalko/drl_results,target=/app/results --entrypoint=/bin/bash drl:latest
 # python -c "import torch; print(torch.cuda.is_available())"
 # python -c "import torch; print(torch.cuda.get_device_name(0))"
 # python -c "import torch; print(torch.version.cuda)"
-
+# --gpus all 
 
 # vlba
 
@@ -170,3 +170,10 @@ WORKDIR /app
 # python train.py --approach A2C --device cpu --idx 1
 # a2c2 
 # python train.py --approach A2C --device cpu --idx 2
+
+# ppo0 
+# python train.py --approach PPO --device cpu --idx 0
+# ppo1 
+# python train.py --approach PPO --device cpu --idx 1
+# ppo2 
+# python train.py --approach PPO --device cpu --idx 2
