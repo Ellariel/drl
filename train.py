@@ -34,6 +34,8 @@ parser.add_argument("--epochs", default=10, type=int)
 parser.add_argument("--timesteps", default=1e5, type=int)
 parser.add_argument("--device", default="cuda", type=str)
 
+parser.add_argument("--save", default=95, type=int)
+
 args = parser.parse_args()
 
 idx = args.idx
@@ -43,6 +45,7 @@ approach = args.approach
 epochs = args.epochs
 sample = args.sample
 attempts = args.attempts
+save_trhld = args.save
 
 if args.env == "env":
     version = "env"
@@ -199,7 +202,7 @@ for a in range(attempts):
             shutil.move(f, f + ".tmp")
         model.save(f)
 
-        if max(train_score, test_score) > 0.5:
+        if max(train_score, test_score) >= save_trhld / 100:
             model.save(f + f"-{train_score:.3f}-{test_score:.3f}")
             print("saved:", f + f"-{train_score:.3f}-{test_score:.3f}")
 
